@@ -1,525 +1,503 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Digital Hound 360</title>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
-<style>
-    body 
-    {
-        margin: 0;
-        background: black;
-        font-family: 'Montserrat', sans-serif;
-    }
-
-    .top-bar 
-    {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        height: 125px;
-        display: flex;
-        align-items: center;
-
-        background: rgba(0, 0, 0, 0.1); 
-        
-        backdrop-filter: blur(2px);
-        -webkit-backdrop-filter: blur(5px);
-
-        z-index: 100;
-    }
-
-    .top-bar button 
-    {
-        background: transparent;
-        border: none;
-        color: rgb(211, 208, 208);
-        font-family: 'Montserrat', sans-serif;
-        font-size: 20px;
-        font-weight: 100;
-        margin-left: 30px;
-        cursor: pointer;
-        
-    }
-
-    .MainTitle
-    {
-        background: linear-gradient(to right, #999898, #a5a4a4, #d1cdcb);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        color: transparent;
-        
-        margin-top: 60px;
-        margin-left: 200px;
-        font-size: 45px;
-        font-weight: 10;
-        letter-spacing: 1px;
-        margin-right: auto;
-    }
-
-    .About 
-    {
-        text-underline-offset: 8px;
-        margin: 10px;
-        
-    }
-    .Solutions
-    {
-        text-underline-offset: 8px;
-        margin: 10px;
-    }
-    .Contact
-    {
-        text-underline-offset: 8px;
-        margin-right: 350px;
-    }
-
-    .homepage-left 
-    {
-        position: relative;
-        z-index: 10;
-        display: inline-block;
-        margin-top: 480px;
-        margin-left: 200px;
-        letter-spacing: -1px;
-        
-        font-weight: 400;
-        font-size: 90px;
-        line-height: 1.1;
-        
-        background: linear-gradient(to right, #ff2222, #ff5031, #ffa061);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        color: transparent;
-    }
-
-    .video {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        object-fit: cover;
-        z-index: -1;
-    }
-
-
-    .full-page-overlay 
-    {
-        display: none; 
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        
-        width: 1200px; 
-        padding: 150px; 
-        
-
-        background-color: rgba(0, 0, 0, 0); 
-        
-
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-
-        z-index: 2000;
-        font-family: 'Montserrat', sans-serif;
-        border-radius: 12px; 
-    }
-
-
-    .popup-text 
-    {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start; 
-        justify-content: flex-start; 
-        height: 100%;
-        color: white;
-        
-
-        padding-left: 50px; 
-    }
-
-    .popup-text h1 
-    {
-        font-size: 55px;
-        margin-top: 0;
-    }
-
-    .popup-text p
-    {
-        font-size: 20px;
-        line-height: 1.6;
-        margin-bottom: 15px;
-    }
-
-    .fading-line 
-    {
-        width: 100%;        
-        height: 4px;         
-        margin-top: 10px;    
-        margin-bottom: 20px; 
-        
-        background: linear-gradient(to right, white, transparent);
-        
-        border: none;
-    }
-
-    .cta-button 
-    {
-    background-color: #e0e0e0;
-    color: black; 
-    border: none;
-    padding: 20px 45px;
-    font-size: 22px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    margin-top: 40px;
-    cursor: pointer;
-    border-radius: 50px; 
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-
-    .cta-button:hover 
-    {
-    background-color: #f5f5f5; 
-    transform: scale(1.02); 
-    }
-
-
-    .close-btn 
-    {
-        position: absolute;
-        top: 30px; 
-        right: 40px;
-        font-size: 40px;
-        color: white;
-        cursor: pointer;
-        z-index: 2001;
-    }
-
-
-    .dark-popup 
-    {
-    background-color: rgb(17, 17, 17) !important;
-    }
-
-
-    .white-text h1, .white-text p 
-    {
-    color: white !important;
-    }
-
-
-    .white-cross 
-    {
-    color: white !important;
-    }
-
-
-    .white-text h1 
-    {
-    background: linear-gradient(to right, #ff6284, #ff809b, #ffd17b);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-    display: inline-block;
-    font-size: 40px;     
-    line-height: 1.1;
-    }
-
-
-    #contactPopup.dark-popup 
-    {
-
-        background-color: rgba(0, 0, 0, 0.5) !important; 
-        backdrop-filter: blur(30px) !important;
-        -webkit-backdrop-filter: blur(30px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    #solutionsPopup, 
-    #hrDetailPopup, 
-    #multimediaDetailPopup, 
-    #corporateDetailPopup {
-        min-height: 518px; 
-        display: none; 
-        padding-top: 80px !important;
-    }
-
-    #hrDetailPopup .popup-text,
-    #multimediaDetailPopup .popup-text,
-    #corporateDetailPopup .popup-text {
-        justify-content: flex-start;
-    }
-
-    #solutionsPopup .popup-text {
-        justify-content: flex-start;
-    }
-
-
-    #solutionsPopup.dark-popup, 
-    #hrDetailPopup.dark-popup, 
-    #multimediaDetailPopup.dark-popup, 
-    #corporateDetailPopup.dark-popup {
-        background-color: rgba(0, 0, 0, 0.5) !important;
-        backdrop-filter: blur(30px) !important;
-        -webkit-backdrop-filter: blur(30px) !important;
-        display: none;
-    }
-
-    #solutionsPopup .solutions-header 
-    {
-        background: linear-gradient(to right, #ffffff, #a1a0a0, #727272) !important;
-        -webkit-background-clip: text !important;
-        background-clip: text !important;
-        -webkit-text-fill-color: transparent !important;
-        
-        display: inline-block;
-        font-size: 40px;
-        margin-top: 0;
-        margin-bottom: 0;
-    }
-
-    #solutionsPopup .fading-line {
-        width: 800px;
-        margin-top: 20px;
-        background: linear-gradient(to right, white, transparent) !important;
-    }
-
-
-    .solutions-images-container 
-    {
-        display: flex;
-        justify-content: space-between; 
-        align-items: flex-start;
-        width: 100%; 
-        margin-top: 60px;      
-        gap: 20px; 
-    }
-
-.solution-col 
-    {
-        flex: 1;
-        display: flex;
-        flex-direction: column; 
-        align-items: flex-start; 
-        padding: 10px;
-    }
-
-
-    .image-wrapper {
-        width: 100%;
-        height: 250px;
-        display: flex;
-        align-items: flex-end;
-        justify-content: flex-start;
-        margin-bottom: 25px;
-    }
-
-    .solution-col img 
-    {
-        max-width: 100%;
-        max-height: 100%;
-        height: auto;
-        width: auto;
-        object-fit: contain;
-    }
-
-
-    .solution-col h3 
-    {
-        font-size: 20px;
-        margin: 0;
-        color: white;
-        text-transform: none;
-        letter-spacing: 0.5px;
-    }
-
-
-    .solution-col p 
-    {
-        font-size: 16px;
-        color: #d1cdcb;
-        margin-top: 10px;
-        line-height: 1.4;
-        font-weight: 100;
-    }
-
-    .solution-btn {
-        background: transparent;
-        border: 1px solid rgba(255, 255, 255, 0);
-        width: 100%;
-        text-align: left;
-        cursor: pointer;
-        padding: 20px;
-        border-radius: 20px;
-        transition: all 0.3s ease;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-
-    .solution-btn:hover {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        transform: scale(1.02);
-    }
-
-
-    .solution-btn h3, .solution-btn p {
-        font-family: 'Montserrat', sans-serif;
-    }
-
-
-    .consulting-grid {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        margin-top: 40px;
-        gap: 40px;
-    }
-
-    .consulting-col {
-        flex: 1;
-        padding-right: 20px;
-
-        border-right: 1px solid white; 
-    }
-
-    .consulting-col:last-child {
-        border-right: none;
-    }
-
-    .consulting-col h2 {
-        font-size: 22px;
-        color: white;
-        margin-bottom: 20px;
-        line-height: 1.2;
-    }
-
-    .consulting-col p {
-        font-size: 16px;
-        color: white;
-        line-height: 1.5;
-        font-weight: 100;
-    }
-
-</style>
-    </head>
-    <body>
-
+<head>
+    <title>Digital Hound 360</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        body 
+        {
+            margin: 0;
+            background: black;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .top-bar 
+        {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 125px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.1); 
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(5px);
+            z-index: 100;
+        }
+
+        .top-bar > div {
+            display: flex;
+            gap: 3em;
+            padding-right: 3em;
+        }
+
+        .top-bar button 
+        {
+            background: transparent;
+            border: none;
+            color: rgb(211, 208, 208);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 100;
+            cursor: pointer;
+        }
+
+        .MainTitle
+        {
+            background: linear-gradient(to right, #999898, #a5a4a4, #d1cdcb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            /*margin-top: .5em;*/
+            margin-left: 3em;
+            font-size: 2.1rem;
+            font-weight: 10;
+            letter-spacing: 1px;
+            margin-right: auto;
+        }
+
+        .About 
+        {
+            text-underline-offset: 8px;
+            /*margin: 10px;*/
+            
+        }
+        .Solutions
+        {
+            text-underline-offset: 8px;
+            /*margin: 10px;*/
+        }
+        .Contact
+        {
+            text-underline-offset: 8px;
+            /*margin-right: 350px;*/
+        }
+
+        .homepage-left 
+        {
+            margin-top: 35vh;
+            margin-left: 2.1em;
+            background: linear-gradient(to right, #ff2222, #ff5031, #ffa061);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            letter-spacing: -1px;
+            font-size: 5.2rem;
+            font-weight: 400;
+            line-height: 1.1;
+            z-index: 10;
+        }
+
+        .video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .full-page-overlay 
+        {
+            display: none; 
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: min(1200px, 90vw);
+            max-height: 90vh;
+            padding: clamp(40px, 6vw, 150px);
+            box-sizing: border-box;
+            background-color: rgba(0, 0, 0, 0); 
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 2000;
+            font-family: 'Montserrat', sans-serif;
+            border-radius: 12px; 
+        }
+
+        .popup-text 
+        {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; 
+            justify-content: flex-start; 
+            height: 100%;
+            color: white;
+            padding-left: 50px; 
+        }
+
+        .popup-text h1 
+        {
+            font-size: 40px;
+            margin-top: 0;
+        }
+
+        .popup-text p
+        {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .fading-line 
+        {
+            width: 100%;        
+            height: 4px;         
+            margin-top: 10px;    
+            margin-bottom: 20px; 
+            background: linear-gradient(to right, white, transparent);
+            border: none;
+        }
+
+        .cta-button 
+        {
+            background-color: #e0e0e0;
+            color: black; 
+            border: none;
+            padding: 20px 45px;
+            font-size: 22px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            margin-top: 40px;
+            cursor: pointer;
+            border-radius: 50px; 
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .cta-button:hover 
+        {
+            background-color: #f5f5f5; 
+            transform: scale(1.02); 
+        }
+
+        .close-btn 
+        {
+            position: absolute;
+            top: clamp(20px, 2vw, 30px);
+            right: clamp(20px, 2vw, 40px);
+            font-size: clamp(28px, 3vw, 40px);
+            color: white;
+            cursor: pointer;
+            z-index: 2001;
+        }
+
+        .dark-popup 
+        {
+            background-color: rgb(17, 17, 17) !important;
+        }
+
+        .white-text h1, .white-text p 
+        {
+            color: white !important;
+        }
+
+        .white-cross 
+        {
+            color: white !important;
+        }
+
+        .white-text h1 
+        {
+            background: linear-gradient(to right, #ff6284, #ff809b, #ffd17b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            display: inline-block;
+            font-size: 40px;     
+            line-height: 1.1;
+        }
+
+        #contactPopup.dark-popup 
+        {
+
+            background-color: rgba(0, 0, 0, 0.5) !important; 
+            backdrop-filter: blur(30px) !important;
+            -webkit-backdrop-filter: blur(30px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #solutionsPopup, 
+        #hrDetailPopup, 
+        #multimediaDetailPopup, 
+        #corporateDetailPopup {
+            min-height: 518px; 
+            display: none; 
+            padding-top: 80px !important;
+        }
+
+        #hrDetailPopup .popup-text,
+        #multimediaDetailPopup .popup-text,
+        #corporateDetailPopup .popup-text {
+            justify-content: flex-start;
+        }
+
+        #solutionsPopup .popup-text {
+            justify-content: flex-start;
+        }
+
+
+        #solutionsPopup.dark-popup, 
+        #hrDetailPopup.dark-popup, 
+        #multimediaDetailPopup.dark-popup, 
+        #corporateDetailPopup.dark-popup {
+            background-color: rgba(0, 0, 0, 0.5) !important;
+            backdrop-filter: blur(30px) !important;
+            -webkit-backdrop-filter: blur(30px) !important;
+            display: none;
+        }
+
+        #solutionsPopup .solutions-header 
+        {
+            background: linear-gradient(to right, #ffffff, #a1a0a0, #727272) !important;
+            -webkit-background-clip: text !important;
+            background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            
+            display: inline-block;
+            font-size: 40px;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        #solutionsPopup .fading-line {
+            width: 800px;
+            margin-top: 20px;
+            background: linear-gradient(to right, white, transparent) !important;
+        }
+
+
+        .solutions-images-container 
+        {
+            display: flex;
+            justify-content: space-between; 
+            align-items: flex-start;
+            width: 100%; 
+            margin-top: 60px;      
+            gap: 20px; 
+        }
+
+        .solution-col 
+        {
+            flex: 1;
+            display: flex;
+            flex-direction: column; 
+            align-items: flex-start; 
+            padding: 10px;
+        }
+
+
+        .image-wrapper {
+            width: 100%;
+            height: 250px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .solution-col img 
+        {
+            max-width: 100%;
+            max-height: 100%;
+            height: auto;
+            width: auto;
+            object-fit: contain;
+        }
+
+
+        .solution-col h3 
+        {
+            font-size: 20px;
+            margin: 0;
+            color: white;
+            text-transform: none;
+            letter-spacing: 0.5px;
+        }
+
+
+        .solution-col p 
+        {
+            font-size: 16px;
+            color: #d1cdcb;
+            margin-top: 10px;
+            line-height: 1.4;
+            font-weight: 100;
+        }
+
+        .solution-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0);
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            padding: 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+
+        .solution-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
+        }
+
+
+        .solution-btn h3, .solution-btn p {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+
+        .consulting-grid {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 40px;
+            gap: 40px;
+        }
+
+        .consulting-col {
+            flex: 1;
+            padding-right: 20px;
+
+            border-right: 1px solid white; 
+        }
+
+        .consulting-col:last-child {
+            border-right: none;
+        }
+
+        .consulting-col h2 {
+            font-size: 22px;
+            color: white;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .consulting-col p {
+            font-size: 16px;
+            color: white;
+            line-height: 1.5;
+            font-weight: 100;
+        }
+    </style>
+</head>
+<body>
         <div class="top-container">
             <div class="top-bar">
                 <h1 class="MainTitle">Digital Hound</h1>
-
-                <button class="About" onclick="
-                    document.getElementById('contactPopup').style.display='none'; 
-                    document.getElementById('solutionsPopup').style.display='none'; 
-                    document.getElementById('hrDetailPopup').style.display='none'; 
-                    document.getElementById('multimediaDetailPopup').style.display='none'; 
-                    document.getElementById('corporateDetailPopup').style.display='none'; 
-                    document.getElementById('aboutPopup').style.display='block'">ABOUT</button>
-
-                <button class="Solutions" onclick="
-                    document.getElementById('aboutPopup').style.display='none'; 
-                    document.getElementById('contactPopup').style.display='none'; 
-                    document.getElementById('hrDetailPopup').style.display='none'; 
-                    document.getElementById('multimediaDetailPopup').style.display='none'; 
-                    document.getElementById('corporateDetailPopup').style.display='none'; 
-                    document.getElementById('solutionsPopup').style.display='block'">SOLUTIONS</button>
-
-                <button class="Contact" onclick="
-                    document.getElementById('aboutPopup').style.display='none'; 
-                    document.getElementById('solutionsPopup').style.display='none'; 
-                    document.getElementById('hrDetailPopup').style.display='none'; 
-                    document.getElementById('multimediaDetailPopup').style.display='none'; 
-                    document.getElementById('corporateDetailPopup').style.display='none'; 
-                    document.getElementById('contactPopup').style.display='block'">CONTACT</button>
+                <div>
+                    <button class="About" onclick="
+                        document.getElementById('contactPopup').style.display='none'; 
+                        document.getElementById('solutionsPopup').style.display='none'; 
+                        document.getElementById('hrDetailPopup').style.display='none'; 
+                        document.getElementById('multimediaDetailPopup').style.display='none'; 
+                        document.getElementById('corporateDetailPopup').style.display='none'; 
+                        document.getElementById('aboutPopup').style.display='block'"
+                    >
+                        ABOUT
+                    </button>
+                    <button class="Solutions" onclick="
+                        document.getElementById('aboutPopup').style.display='none'; 
+                        document.getElementById('contactPopup').style.display='none'; 
+                        document.getElementById('hrDetailPopup').style.display='none'; 
+                        document.getElementById('multimediaDetailPopup').style.display='none'; 
+                        document.getElementById('corporateDetailPopup').style.display='none'; 
+                        document.getElementById('solutionsPopup').style.display='block'"
+                    >
+                        SOLUTIONS
+                    </button>
+                    <button class="Contact" onclick="
+                        document.getElementById('aboutPopup').style.display='none'; 
+                        document.getElementById('solutionsPopup').style.display='none'; 
+                        document.getElementById('hrDetailPopup').style.display='none'; 
+                        document.getElementById('multimediaDetailPopup').style.display='none'; 
+                        document.getElementById('corporateDetailPopup').style.display='none'; 
+                        document.getElementById('contactPopup').style.display='block'"
+                    >
+                        CONTACT
+                    </button>
+                </div>
             </div>
-
-        <div class="homepage">
-
-            <div class="homepage-left">
-                <p>Consult. <br>Collaborate. <br>Create.</b></p>
-            </div>
-
-
-                <video class ="video" autoplay loop muted playsinline>
-                <source src="Website_BG_page.mp4" type="video/mp4">
-                </video>
-
-            
         </div>
 
+            <div class="homepage">
+                <div class="homepage-left">
+                    <p>Consult.<br> Collaborate.<br> Create.</p>
+                </div>
+                <!-- <video class ="video" autoplay loop muted playsinline>
+                    <source src="Website_BG_page.mp4" type="video/mp4">
+                </video> -->
+            </div>
 
-
-        <div id="aboutPopup" class="full-page-overlay">
-            <span class="close-btn" onclick="document.getElementById('aboutPopup').style.display='none'">&times;</span>
+            <div id="aboutPopup" class="full-page-overlay">
+                <span class="close-btn" onclick="document.getElementById('aboutPopup').style.display='none'">&times;</span>
                 <div class="popup-text">
                     <h1>About Us</h1>
                     <div class="fading-line"></div>
                     <p>At Digital Hound, we craft custom solutions to optimize your business operations and amplify your brand's presence.</p>
                     <p>Whether you need to fix your HR and business operations or launch a multimedia project, we've got the tools and expertise to help you succeed.</p>
                     <p>Our goal is to build solutions that work for you.</p>
-                <button class="cta-button" onclick="document.getElementById('aboutPopup').style.display='none'; document.getElementById('contactPopup').style.display='block'">Ready to get started? Let's talk.</button>
+                    <button class="cta-button" onclick="document.getElementById('aboutPopup').style.display='none'; document.getElementById('contactPopup').style.display='block'">Ready to get started? Let's talk.</button>
                 </div>
-        </div>
-        
-        <div id="contactPopup" class="full-page-overlay dark-popup">
-            <span class="close-btn white-cross" onclick="document.getElementById('contactPopup').style.display='none'">&times;</span>
+            </div>
+            
+            <div id="contactPopup" class="full-page-overlay dark-popup">
+                <span class="close-btn white-cross" onclick="document.getElementById('contactPopup').style.display='none'">&times;</span>
                 <div class="popup-text white-text">
-                <h1>Building Systems.<br>Empowering Teams.<br>Crafting Creativity.</h1>
-                        <p>Book a consultation with us.</p>
-                        <p><b>Digital Hound 360 Co. Ltd.</b><br>&nbsp<br>Unit 2404 Discovery Suites, ADB Avenue<br>Ortigas, Pasig City</p>
-                        <p>Email: hello@digitalhound360.com<br>Number: 0961-731-2625</p>
+                    <h1>Building Systems.<br>Empowering Teams.<br>Crafting Creativity.</h1>
+                    <p>Book a consultation with us.</p>
+                    <p><b>Digital Hound 360 Co. Ltd.</b><br>&nbsp<br>Unit 2404 Discovery Suites, ADB Avenue<br>Ortigas, Pasig City</p>
+                    <p>Email: hello@digitalhound360.com<br>Number: 0961-731-2625</p>
                 </div>
-        </div>
+            </div>
 
-        <div id="solutionsPopup" class="full-page-overlay dark-popup">
-            <span class="close-btn white-cross" onclick="document.getElementById('solutionsPopup').style.display='none'">&times;</span>
+            <div id="solutionsPopup" class="full-page-overlay dark-popup">
+                <span class="close-btn white-cross" onclick="document.getElementById('solutionsPopup').style.display='none'">&times;</span>
                 <div class="popup-text white-text">
                     <h1 class="solutions-header">Our Solutions</h1>
                     <div class="fading-line"></div>
-            
-                        <div class="solutions-images-container">
+                    <div class="solutions-images-container">
+                        <div class="solution-col">
+                            <button class="solution-btn" onclick="document.getElementById('solutionsPopup').style.display='none'; document.getElementById('hrDetailPopup').style.display='block'">
+                                <div class="image-wrapper">
+                                    <img src="sol 1 dh360.png" alt="HR">
+                                </div>
+                                <h3>HR / Organizational Dev Consulting</h3>
+                                <p>- Executive Search and Headhunting<br>- Managed Services</p>
+                            </button>
+                        </div>
 
-                            <div class="solution-col">
-                                <button class="solution-btn" onclick="document.getElementById('solutionsPopup').style.display='none'; document.getElementById('hrDetailPopup').style.display='block'">
-                                    <div class="image-wrapper">
-                                        <img src="sol 1 dh360.png" alt="HR">
-                                    </div>
-                                    <h3>HR / Organizational Dev Consulting</h3>
-                                    <p>- Executive Search and Headhunting<br>- Managed Services</p>
-                                </button>
-                            </div>
+                        <div class="solution-col">
+                            <button class="solution-btn" onclick="document.getElementById('solutionsPopup').style.display='none'; document.getElementById('multimediaDetailPopup').style.display='block'">
+                                <div class="image-wrapper">
+                                    <img src="sol 2 dh360.png" alt="Multimedia">
+                                </div>
+                                <h3>Multimedia & Creatives</h3>
+                                <p>- 3D Animation<br>- 3D Modeling<br>- Graphic Design<br>- Projection Mapping</p>
+                            </button>
+                        </div>
 
-                            <div class="solution-col">
-                                <button class="solution-btn" onclick="document.getElementById('solutionsPopup').style.display='none'; document.getElementById('multimediaDetailPopup').style.display='block'">
-                                    <div class="image-wrapper">
-                                        <img src="sol 2 dh360.png" alt="Multimedia">
-                                    </div>
-                                    <h3>Multimedia & Creatives</h3>
-                                    <p>- 3D Animation<br>- 3D Modeling<br>- Graphic Design<br>- Projection Mapping</p>
-                                </button>
-                            </div>
-
-                            <div class="solution-col">
-                                <button class="solution-btn" onclick="document.getElementById('solutionsPopup').style.display='none'; document.getElementById('corporateDetailPopup').style.display='block'">
-                                    <div class="image-wrapper">
-                                        <img src="sol 3 dh360.png" alt="Corporate">
-                                    </div>
-                                    <h3>Corporate Workshops and Team Building</h3>
-                                </button>
-                            </div>
-
+                        <div class="solution-col">
+                            <button class="solution-btn" onclick="document.getElementById('solutionsPopup').style.display='none'; document.getElementById('corporateDetailPopup').style.display='block'">
+                                <div class="image-wrapper">
+                                    <img src="sol 3 dh360.png" alt="Corporate">
+                                </div>
+                                <h3>Corporate Workshops and Team Building</h3>
+                            </button>
                         </div>
                     </div>
                 </div>
-        </div>
+            </div>
 
         <div id="hrDetailPopup" class="full-page-overlay dark-popup">
             <span class="close-btn white-cross" onclick="document.getElementById('hrDetailPopup').style.display='none'; document.getElementById('solutionsPopup').style.display='block'">&times;</span>
@@ -556,11 +534,15 @@
                 <div class="fading-line"></div>
                 
                 <div style="margin-top: 60px; max-width: 900px;">
-                    <p style="font-size: 38px; font-weight: 600; line-height: 1.3; margin-bottom: 30px;">
+                    <p style="font-size: 22px; font-weight: 600; line-height: 1.3; margin-bottom: 30px;">
                         As part of our 360-degree business support, our creative studio delivers stunning visual experiences.
                     </p>
-                    <p style="font-size: 28px; font-weight: 100; color: #d1cdcb; line-height: 1.4;">
+                    <p style="font-size: 16; font-weight: 100; color: #d1cdcb; line-height: 1.4;">
                         Whether it’s 3D asset creation, animation, or specialized projection displays, we build the visual systems that make your brand stand out.
+                    </p>
+
+                    <p style="font-style: italic;">
+                        Note: Our work is bound by strict NDAs. To discuss our full capabilities and project insights, let’s schedule an exploratory meeting.
                     </p>
                 </div>
             </div>
@@ -573,15 +555,14 @@
                 <div class="fading-line"></div>
                 
                 <div style="margin-top: 60px; max-width: 950px;">
-                    <p style="font-size: 38px; font-weight: 600; line-height: 1.3; margin-bottom: 30px;">
+                    <p style="font-size: 22px; font-weight: 600; line-height: 1.3; margin-bottom: 30px;">
                         At Digital Hound, we believe that a company’s success begins with a solid internal team.
                     </p>
-                    <p style="font-size: 28px; font-weight: 100; color: #d1cdcb; line-height: 1.4;">
+                    <p style="font-size: 16px; font-weight: 100; color: #d1cdcb; line-height: 1.4;">
                         We don’t do generic training; we facilitate customized workshops designed to turn operational gaps into seamless synergy.
                     </p>
                 </div>
             </div>
         </div>
-
     </body>
 </html>
