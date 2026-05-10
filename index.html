@@ -20,6 +20,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 0 3em;
+            box-sizing: border-box;
             background: rgba(0, 0, 0, 0.1); 
             backdrop-filter: blur(2px);
             -webkit-backdrop-filter: blur(5px);
@@ -29,7 +31,6 @@
         .top-bar > div {
             display: flex;
             gap: 3em;
-            padding-right: 3em;
         }
 
         .top-bar button 
@@ -50,36 +51,41 @@
             background-clip: text;
             -webkit-text-fill-color: transparent;
             color: transparent;
-            /*margin-top: .5em;*/
-            margin-left: 3em;
-            font-size: 2.1rem;
-            font-weight: 10;
             letter-spacing: 1px;
             margin-right: auto;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.175rem;
+            font-weight: 100;
+            text-transform: uppercase;
         }
 
         .About 
         {
             text-underline-offset: 8px;
-            /*margin: 10px;*/
-            
         }
+
         .Solutions
         {
             text-underline-offset: 8px;
-            /*margin: 10px;*/
         }
+
         .Contact
         {
             text-underline-offset: 8px;
-            /*margin-right: 350px;*/
         }
 
-        .homepage-left 
+        .homepage {
+            padding: 0 3em;
+        }
+
+        .homepage-left
         {
-            margin-top: 35vh;
-            margin-left: 2.1em;
-            background: linear-gradient(to right, #ff2222, #ff5031, #ffa061);
+            position: absolute;
+            bottom: 45px;
+            left: 48px;
+            background: linear-gradient(to right, #ff2222, #ff809b, #ffd17b);
+            /*background: linear-gradient(to right, #ff6284, #ff809b, #ffd17b);*/
+            /*background: linear-gradient(to right, #ff2222, #ff5031, #ffa061);*/
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -89,6 +95,7 @@
             font-weight: 400;
             line-height: 1.1;
             z-index: 10;
+
         }
 
         .video {
@@ -160,7 +167,6 @@
             color: black; 
             border: none;
             padding: 20px 45px;
-            font-size: 22px;
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             margin-top: 40px;
@@ -431,7 +437,7 @@
 
             <div class="homepage">
                 <div class="homepage-left">
-                    <p>Consult.<br> Collaborate.<br> Create.</p>
+                    Consult.<br> Collaborate.<br> Create.
                 </div>
                 <video class ="video" autoplay loop muted playsinline>
                     <source src="Website_BG_page.mp4" type="video/mp4">
